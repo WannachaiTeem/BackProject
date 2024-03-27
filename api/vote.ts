@@ -246,6 +246,7 @@ function EloRating(Ra: number, Rb: number, K: number, d: boolean) {
 
 
 
+
 //ค้นหาRanking ของเมื่อวาน
 
 //ค้นหา user ทั้งหมด
