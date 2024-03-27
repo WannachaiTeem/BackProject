@@ -119,6 +119,8 @@ router.post("/addvote/elo", (req, res) => {
   let UpdateRate = EloRating(Ra, Rb, K, D)
   const RaNew = UpdateRate.RaNew
   const RbNew = UpdateRate.RbNew
+  const Ea = UpdateRate.Ea
+  const Eb = UpdateRate.Eb
 
   const RaChange = RaNew - Ra;
   const RbChange = RbNew - Rb;
@@ -172,13 +174,21 @@ router.post("/addvote/elo", (req, res) => {
     "RaNew": RaNew,
     "RbNew": RbNew,
     "RaChange": RaChange,
-    "RbChange": RbChange
+    "RbChange": RbChange,
+    "Ea" : Ea,
+    "Eb" : Eb,
+    "K" : K
+
   }
   res
     .status(200)
     .json(resData);
 
 });
+
+
+
+//*************************************************************************************************************************** */
 // Pre Elo
 function Probability(rating1: number, rating2: number) {
   return (
@@ -220,12 +230,16 @@ function EloRating(Ra: number, Rb: number, K: number, d: boolean) {
     " Rb = " +
     Math.round(Rb * 1000000.0) / 1000000.0
   );
-
+  
+  //return ค่าใหม่ของทั้ง2คนกลับไป
   return {
+    "Ea" : Pa,
+    "Eb" : Pb,
     "RaNew": Ra,
     "RbNew": Rb
   }
 }
+
 
 
 
