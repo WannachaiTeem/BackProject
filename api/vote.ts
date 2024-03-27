@@ -37,6 +37,8 @@ router.get("/", (req, res) => {
   });
 });
 
+
+// Graph 7 วัน
 //ค้นหา Vote ทั้งหมด ของ ID นั้นๆ โดยแยกเป็น ล่าสุดของแต่ละวัน
 router.get("/:LID", (req, res) => {
   let sql = "SELECT latestScore, LID, DATE_FORMAT(DATE(date), '%Y-%m-%d') AS voting_date FROM Vote WHERE (LID, VID) IN (SELECT LID, MAX(VID) AS max_vid FROM Vote WHERE LID = ? AND DATE(date) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() GROUP BY DATE(date)) ORDER BY voting_date DESC";
